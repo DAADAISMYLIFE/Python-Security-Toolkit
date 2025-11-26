@@ -12,7 +12,7 @@
 - **multi_chat_client.py** - 멀티 클라이언트 채팅 프로그램
 - **multi_chat_server.py** - 멀티 클라이언트 채팅 서버
 
-### 02_Hacking_Requests (HTTP 해킹 기법)
+### 02_Requests_Library (HTTP 해킹 기법)
 웹 보안 관련 요청 조작 및 프록시 활용
 
 - **basic_requests.py** - 기본 HTTP 요청 방법
