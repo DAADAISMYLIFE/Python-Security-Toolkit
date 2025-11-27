@@ -17,18 +17,24 @@ def main():
     
         # 파일 전체 크기 받기
         data = conn.recv(1024)
-        print(data)
-        file_name, file_size = data.decode('utf-8').split()
-    
-        print(f"file_info: {file_name} {file_size}")
+        delimiter = b"<END>"
         
-        file = open("copied"+file_name, "wb")
+        if delimiter in data:
+            header, body_chunk = data.split(delimiter, 1)
+
+
+            file_info = header.decode('utf-8')
+            filename, filesize = file_info.split()
+            print(f"file_info: {filename} {filesize}")
         
-        while True:
-            file_byte = conn.recv(1024)
-            if not file_byte: break
-            file.write(file_byte) 
-        file.close()
+            file = open("copied"+filename, "wb")
+            file.write(body_chunk)
+
+            while True:
+                file_byte = conn.recv(1024)
+                if not file_byte: break
+                file.write(file_byte) 
+            file.close()
         sock.close()
 
     except Exception as e:

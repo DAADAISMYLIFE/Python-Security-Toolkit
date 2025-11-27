@@ -18,11 +18,10 @@ def main():
             sock = socket.socket(family=socket.AF_INET, type=socket.SOCK_STREAM)
             sock.connect((SERVER_HOST, PORT))
 
-            send_data = f"{file_path} {file_size}"
+            send_data = f"{file_path} {file_size}<END>"
             sock.send(send_data.encode('utf-8'))
             
             print(send_data) 
-            time.sleep(1)
             while True:
                 file_byte = file.read(1024)
                 if not file_byte: break
