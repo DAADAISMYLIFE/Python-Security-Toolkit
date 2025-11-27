@@ -17,14 +17,15 @@ def main():
     
         # 파일 전체 크기 받기
         data = conn.recv(1024)
+        print(data)
         file_name, file_size = data.decode('utf-8').split()
     
         print(f"file_info: {file_name} {file_size}")
         
-        file = open(file_name, "rb")
+        file = open("copied"+file_name, "wb")
         
         while True:
-            file_byte = conn.send(1024)
+            file_byte = conn.recv(1024)
             if not file_byte: break
             file.write(file_byte) 
         file.close()
@@ -37,3 +38,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
