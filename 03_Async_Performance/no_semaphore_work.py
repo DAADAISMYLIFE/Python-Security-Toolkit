@@ -1,0 +1,19 @@
+import asyncio
+import random
+import time
+
+async def work(n, t):
+    await asyncio.sleep(t)
+    print(f"{n} done!")
+
+async def main():
+    start_time = time.time()
+    tasks = [work(i+1, random.random()) for i in range(10000)]
+
+    await asyncio.gather(*tasks)
+    end_time = time.time()
+
+    print("Total Work time:", end_time - start_time)
+
+if __name__ == '__main__':
+    asyncio.run(main())
